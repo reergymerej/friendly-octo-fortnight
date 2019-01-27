@@ -20,12 +20,12 @@ const inputClassName = [
 
 const Input = (props) => (
   <div>
-    <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor={props.label}>
+    <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor={props.id || props.label}>
       {props.label}
     </label>
     <input
       className={inputClassName}
-      id={props.label}
+      id={props.id || props.label}
       {...props}
     />
   </div>

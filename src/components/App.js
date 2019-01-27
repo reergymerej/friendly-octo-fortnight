@@ -8,6 +8,7 @@ import Button from './Button'
 import Error from './Error'
 import Cards from './Cards'
 import Input from './Input'
+import NewCardForm from './NewCardForm'
 
 class App extends Component {
   state = {
@@ -40,6 +41,8 @@ class App extends Component {
         { this.props.cards.length > 0 &&
           <Cards cards={this.props.cards} onCardDelete={this.props.deleteCard} />
         }
+        <NewCardForm
+        />
       </div>
     )
   }
