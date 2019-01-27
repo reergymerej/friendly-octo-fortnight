@@ -2,6 +2,7 @@ import {
   FLASH_CARDS_REQUESTED,
   FLASH_CARDS_RECEIVED,
   FLASH_CARDS_REQUEST_FAILURE,
+  FLASH_CARD_DELETED,
 } from './actions'
 
 const initialState = {
@@ -27,6 +28,11 @@ export default (state = initialState, action) => {
         ...state,
         loadingFlashCards: false,
         flashCardLoadError: true,
+      }
+    case FLASH_CARD_DELETED:
+      return {
+        ...state,
+        cards: state.cards.filter(card => card._id !== action.card._id),
       }
     default:
       return state

@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from './Button'
 
 class Card extends React.Component {
   state = {
@@ -7,6 +8,10 @@ class Card extends React.Component {
 
   handleClick = () => {
     this.setState((prevState) => ({ showFront: !prevState.showFront }))
+  }
+
+  handleDeleteClick = (event) => {
+    event.stopPropagation()
   }
 
   render() {
@@ -21,6 +26,7 @@ class Card extends React.Component {
           <div className="text-2xl my-2">
             {value}
           </div>
+          <Button onClick={this.handleDeleteClick}>Delete</Button>
         </div>
       </div>
     )
