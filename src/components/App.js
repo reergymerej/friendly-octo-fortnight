@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { flashCardsRequest } from '../actions'
 import Button from './Button'
 import Error from './Error'
+import Cards from './Cards'
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
           disabled={this.props.loadingFlashCards}
         >load cards</Button>
         { this.props.flashCardLoadError && <Error>There was a problem loading the flash cards.</Error> }
+        { this.props.cards.length > 0 && <Cards cards={this.props.cards} /> }
       </div>
     )
   }
@@ -21,6 +23,7 @@ class App extends Component {
 const mapStateToProps = (state) => ({
   loadingFlashCards: state.loadingFlashCards,
   flashCardLoadError: state.flashCardLoadError,
+  cards: state.cards,
 })
 
 const mapDispatchToProps = {
