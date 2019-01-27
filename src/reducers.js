@@ -1,7 +1,8 @@
 import {
   INCREMENT,
   DECREMENT,
-  REQUEST_FLASH_CARDS,
+  FLASH_CARDS_REQUESTED,
+  FLASH_CARDS_RECEIVED,
 } from './actions'
 
 const initialState = {
@@ -20,10 +21,16 @@ export default (state = initialState, action) => {
         ...state,
         count: state.count - 1,
       }
-    case REQUEST_FLASH_CARDS:
+    case FLASH_CARDS_REQUESTED:
       return {
         ...state,
         loadingFlashCards: true,
+      }
+    case FLASH_CARDS_RECEIVED:
+      return {
+        ...state,
+        loadingFlashCards: false,
+        cards: action.cards,
       }
     default:
       return state
