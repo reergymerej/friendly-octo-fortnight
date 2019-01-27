@@ -1,15 +1,16 @@
 const server = 'http://localhost:3030/'
 
-// single tag, search front and back
-// http://localhost:3030/flashcards?$or[0][front.tags]=spanish&$or[1][back.tags]=spanish
-
 const toLower = (x) => x.toLowerCase()
 
-function getQueryForTags(tags) {
+const getOrForTag = (i, tag) => {
+  return `$or[${i}][front.tags]=${tag}&$or[${i + 1}][back.tags]=${tag}`
+}
+
+export function getQueryForTags(tags) {
   tags = tags.map(toLower)
   if (tags.length) {
-    const [tag] = tags
-    return `?$or[0][front.tags]=${tag}&$or[1][back.tags]=${tag}`
+    const ors = tags.map((tag, i) => getOrForTag(i * 2, tag)).join('&')
+    return `?${ors}`
   }
   return ''
 }
