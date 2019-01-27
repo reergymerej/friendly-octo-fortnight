@@ -15,6 +15,13 @@ class App extends Component {
     this.setState({ tags: event.target.value })
   }
 
+  handleLoadClick = (event) => {
+    const tags = this.state.tags.split(',')
+      .map(x => x.trim())
+      .filter(x => !!x)
+    this.props.flashCardsRequest(tags)
+  }
+
   render() {
     return (
       <div className="container mx-auto my-8">
@@ -25,7 +32,7 @@ class App extends Component {
           onChange={this.handleInputChange}
           value={this.state.tags}
         />
-        <Button onClick={this.props.flashCardsRequest} disabled={this.props.loadingFlashCards}>load cards</Button>
+        <Button onClick={this.handleLoadClick} disabled={this.props.loadingFlashCards}>load cards</Button>
         { this.props.flashCardLoadError && <Error>There was a problem loading the flash cards.</Error> }
         { this.props.cards.length > 0 && <Cards cards={this.props.cards} /> }
       </div>

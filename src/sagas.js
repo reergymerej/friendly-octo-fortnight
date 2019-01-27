@@ -1,5 +1,5 @@
 import { takeEvery, all, call, put } from 'redux-saga/effects'
-import * as API from './api'
+import * as api from './api'
 
 import {
   FLASH_CARDS_REQUESTED,
@@ -7,9 +7,10 @@ import {
   flashCardsRequestFailure,
 } from './actions'
 
-function* flashCardSaga() {
+function* flashCardSaga({ tags }) {
+  // TODO: handle cancel load and timeout with a race
   try {
-    const cards = yield call(API.loadFlashCards)
+    const cards = yield call(api.loadFlashCards, tags)
     yield put(flashCardsReceived(cards))
   } catch (e) {
     yield put(flashCardsRequestFailure())
