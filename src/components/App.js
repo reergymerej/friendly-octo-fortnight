@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { increment, decrement, flashCardsRequest } from '../actions'
 import Button from './Button'
+import Error from './Error'
 
 class App extends Component {
   render() {
@@ -14,6 +15,7 @@ class App extends Component {
           onClick={this.props.flashCardsRequest}
           disabled={this.props.loadingFlashCards}
         >load cards</Button>
+        { this.props.flashCardLoadError && <Error>There was a problem loading the flash cards.</Error> }
       </div>
     )
   }
@@ -22,6 +24,7 @@ class App extends Component {
 const mapStateToProps = (state) => ({
   count: state.count,
   loadingFlashCards: state.loadingFlashCards,
+  flashCardLoadError: state.flashCardLoadError,
 })
 
 const mapDispatchToProps = {

@@ -6,6 +6,7 @@ import {
   DECREMENT,
   FLASH_CARDS_REQUESTED,
   flashCardsReceived,
+  flashCardsRequestFailure,
 } from './actions'
 
 function* increment() {
@@ -19,8 +20,12 @@ function* decrement() {
 }
 
 function* flashCardSaga() {
-  const cards = yield call(API.loadFlashCards)
-  yield put(flashCardsReceived(cards))
+  try {
+    const cards = yield call(API.loadFlashCards)
+    yield put(flashCardsReceived(cards))
+  } catch (e) {
+    yield put(flashCardsRequestFailure())
+  }
 }
 
 function* watchFlashCards() {
