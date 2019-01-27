@@ -1,4 +1,5 @@
 import React from 'react'
+import cx from 'classnames'
 
 const _className = [
   'bg-transparent',
@@ -14,8 +15,16 @@ const _className = [
   'rounded',
 ].join(' ')
 
-const Button = ({ onClick, children, className }) => (
-  <button onClick={onClick} className={`${_className} ${className}`}>
+const getClassName = (_className, className, disabled) => cx(
+  _className,
+  className,
+  {
+    'opacity-50 cursor-not-allowed': disabled,
+  }
+)
+
+const Button = ({ onClick, disabled, children, className }) => (
+  <button onClick={onClick} disabled={disabled} className={getClassName(_className, className, disabled)}>
     {children}
   </button>
 )

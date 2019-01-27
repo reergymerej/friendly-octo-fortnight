@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { increment, decrement } from '../actions'
+import { increment, decrement, requestFlashCards } from '../actions'
 import Button from './Button'
 
 class App extends Component {
@@ -10,6 +10,10 @@ class App extends Component {
         <div>{this.props.count}</div>
         <Button onClick={this.props.decrement}>decrement</Button>
         <Button onClick={this.props.increment}>increment</Button>
+        <Button
+          onClick={this.props.requestFlashCards}
+          disabled={this.props.loadingFlashCards}
+        >load cards</Button>
       </div>
     )
   }
@@ -17,11 +21,13 @@ class App extends Component {
 
 const mapStateToProps = (state) => ({
   count: state.count,
+  loadingFlashCards: state.loadingFlashCards,
 })
 
 const mapDispatchToProps = {
   increment,
   decrement,
+  requestFlashCards,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
