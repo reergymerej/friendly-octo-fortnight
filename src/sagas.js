@@ -1,23 +1,11 @@
-import { takeEvery, delay, all, call, put } from 'redux-saga/effects'
+import { takeEvery, all, call, put } from 'redux-saga/effects'
 import * as API from './api'
 
 import {
-  INCREMENT,
-  DECREMENT,
   FLASH_CARDS_REQUESTED,
   flashCardsReceived,
   flashCardsRequestFailure,
 } from './actions'
-
-function* increment() {
-  yield delay(1000)
-  console.log('incrementalicious')
-}
-
-function* decrement() {
-  yield delay(1333)
-  console.log('so decrementy')
-}
 
 function* flashCardSaga() {
   try {
@@ -34,8 +22,6 @@ function* watchFlashCards() {
 
 export default function* rootSaga() {
   yield all([
-    takeEvery(INCREMENT, increment),
-    takeEvery(DECREMENT, decrement),
     watchFlashCards(),
   ])
 }
