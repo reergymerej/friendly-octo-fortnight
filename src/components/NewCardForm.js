@@ -19,7 +19,7 @@ class NewCardForm extends React.Component {
   }
 
   handleSaveClick = () => {
-    console.log('woo!')
+    this.props.onSave(this.values)
   }
 
   get values() {
@@ -32,6 +32,7 @@ class NewCardForm extends React.Component {
   }
 
   render() {
+    const { disabled } = this.props
     return (
       <div>
         <Input
@@ -39,26 +40,33 @@ class NewCardForm extends React.Component {
           label="Front Value"
           onChange={this.handleFieldChange}
           value={this.state.front}
+          disabled={disabled}
         />
         <Input
           id="frontTags"
           label="Front Tags"
           onChange={this.handleFieldChange}
           value={this.state.frontTags}
+          disabled={disabled}
         />
         <Input
           id="back"
           label="Back Value"
           onChange={this.handleFieldChange}
           value={this.state.back}
+          disabled={disabled}
         />
         <Input
           id="backTags"
           label="Back Tags"
           onChange={this.handleFieldChange}
           value={this.state.backTags}
+          disabled={disabled}
         />
-        <Button onClick={this.handleSaveClick} disabled={!allDefined(this.values)}>Save</Button>
+        <Button
+          onClick={this.handleSaveClick}
+          disabled={disabled || !allDefined(this.values)}
+        >Save</Button>
       </div>
     )
   }

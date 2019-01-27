@@ -8,6 +8,9 @@ import {
   FLASH_CARD_DELETE_REQUEST,
   flashCardDeleteRequestFailure,
   flashCardDeleted,
+  FLASH_CARD_CREATE_REQUEST,
+  flashCardCreateFailure,
+  flashCardCreated,
 } from './actions'
 
 function* flashCardLoad({ tags }) {
@@ -29,9 +32,19 @@ export function* flashCardDelete({ _id }) {
   }
 }
 
+export function* flashCardCreate({ card }) {
+  try {
+    const newCard = yield call(api.createFlashCard, card)
+    yield put(flashCardCreated(newCard))
+  } catch (e) {
+    yield put(flashCardCreateFailure())
+  }
+}
+
 function* watchFlashCards() {
   yield takeEvery(FLASH_CARDS_REQUESTED, flashCardLoad)
   yield takeEvery(FLASH_CARD_DELETE_REQUEST, flashCardDelete)
+  yield takeEvery(FLASH_CARD_CREATE_REQUEST, flashCardCreate)
 }
 
 export default function* rootSaga() {

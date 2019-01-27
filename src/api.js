@@ -28,3 +28,15 @@ export async function deleteFlashCard(id) {
   })
     .then(resp => resp.json())
 }
+
+export async function createFlashCard(card) {
+  console.log('card....', card)
+  return await fetch(`${server}flashcards`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(card),
+  })
+    .then(resp => resp.json())
+}
