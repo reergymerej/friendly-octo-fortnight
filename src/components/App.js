@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { flashCardsRequest } from '../actions'
+import {
+  flashCardsRequest,
+  flashCardDeleteRequest,
+} from '../actions'
 import Button from './Button'
 import Error from './Error'
 import Cards from './Cards'
@@ -34,7 +37,9 @@ class App extends Component {
         />
         <Button onClick={this.handleLoadClick} disabled={this.props.loadingFlashCards}>load cards</Button>
         { this.props.flashCardLoadError && <Error>There was a problem loading the flash cards.</Error> }
-        { this.props.cards.length > 0 && <Cards cards={this.props.cards} /> }
+        { this.props.cards.length > 0 &&
+          <Cards cards={this.props.cards} onCardDelete={this.props.deleteCard} />
+        }
       </div>
     )
   }
@@ -48,6 +53,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   flashCardsRequest,
+  deleteCard: flashCardDeleteRequest,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

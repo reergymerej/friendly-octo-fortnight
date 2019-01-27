@@ -10,6 +10,6 @@ export const FLASH_CARD_DELETE_REQUEST = 'FLASH_CARD_DELETE_REQUEST'
 export const FLASH_CARD_DELETED = 'FLASH_CARD_DELETED'
 export const FLASH_CARD_DELETE_REQUEST_FAILURE = 'FLASH_CARD_DELETE_REQUEST_FAILURE'
 
-export const flashCardDeleteRequest = (id) => ({ type: FLASH_CARD_DELETE_REQUEST, id })
+export const flashCardDeleteRequest = (_id) => ({ type: FLASH_CARD_DELETE_REQUEST, _id })
 export const flashCardDeleted = (card) => ({ type: FLASH_CARD_DELETED, card })
 export const flashCardDeleteRequestFailure = () => ({ type: FLASH_CARD_DELETE_REQUEST_FAILURE })

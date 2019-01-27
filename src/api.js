@@ -26,4 +26,5 @@ export async function deleteFlashCard(id) {
   return await fetch(`${server}flashcards/${id}`, {
     method: 'DELETE',
   })
+    .then(resp => resp.json())
 }

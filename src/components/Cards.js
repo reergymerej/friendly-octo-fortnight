@@ -12,6 +12,7 @@ class Card extends React.Component {
 
   handleDeleteClick = (event) => {
     event.stopPropagation()
+    this.props.onDelete(this.props.id)
   }
 
   render() {
@@ -33,14 +34,24 @@ class Card extends React.Component {
   }
 }
 
-const Cards = ({ cards }) => (
-  <div>
-    { cards.map(card => {
-      return (
-        <Card key={card._id} front={card.front} back={card.back} />
-      )
-    })}
-  </div>
-)
+class Cards extends React.Component {
+  render() {
+    return (
+      <div>
+        { this.props.cards.map(card => {
+          return (
+            <Card
+              key={card._id}
+              id={card._id}
+              front={card.front}
+              back={card.back}
+              onDelete={this.props.onCardDelete}
+            />
+          )
+        })}
+      </div>
+    )
+  }
+}
 
 export default Cards
